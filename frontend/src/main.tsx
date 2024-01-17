@@ -1,20 +1,23 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
-} from 'react-router-dom'
+} from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import "bootstrap/dist/css/bootstrap.min.css";
+import App from "./App";
+import "./index.css";
+import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import axios from "axios";
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import App from './App'
-import './index.css'
-import HomePage from './pages/HomePage'
-import ProductPage from './pages/ProductPage'
-import axios from 'axios'
-
-axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '/'
+// axios.defaults.baseURL =
+//   process.env.NODE_ENV === "development" ? "http://localhost:4000" : "/";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,9 +28,17 @@ const router = createBrowserRouter(
       {/* ... etc. */}
     </Route>
   )
-)
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+);
+
+const queryClient = new QueryClient();
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </HelmetProvider>
   </React.StrictMode>
-)
+);
