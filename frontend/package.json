@@ -12,8 +12,11 @@
   "dependencies": {
     "@tanstack/react-query": "^5.17.15",
     "@tanstack/react-query-devtools": "^5.17.15",
+    "@typegoose/typegoose": "^12.1.0",
     "axios": "^1.6.5",
     "bootstrap": "^5.3.2",
+    "dotenv": "^16.3.2",
+    "mongoose": "^8.1.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.2",
     "react-dom": "^18.2.0",
